@@ -40,23 +40,11 @@ jobs:
           name: Front-End deploy
           command: |
             npm run frontend:deploy
-  # deploy:
-  #   docker:
-  #     - image: "cimg/base:stable"
-  #   steps:
-  #     - node/install
-  #     - checkout
-  #     - aws-cli/setup
-  #     - eb/setup
-  #     - run:
-  #         name: Backend deploy
-  #         command: |
-  #           cd udagram-api
-  #           eb use udagram-api-dev
-  #           eb deploy udagram-api-dev
-  #           eb status
 workflows:
   udagram:
     jobs:
-      - build
-      # - deploy
+      - build:
+          filters:
+            branches:
+              only:
+                - main
